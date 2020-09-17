@@ -1,22 +1,23 @@
-# A multi-sensor benchmark dataset for detecting individual trees in airborne RGB, Hyperspectral and LIDAR point clouds
+# A multi-sensor benchmark dataset for detecting individual trees in airborne RGB, Hyperspectral and LiDAR point clouds
 
 [![Travis-CI Build
 Status](https://travis-ci.org/Weecology/neontreeevaluation_python.svg?branch=master)](https://travis-ci.org/Weecology/neontreeevaluation_python)
 
+Maintainers: Dylan Stewart and Ben Weinstein - University of Florida.
 
- Maintainers: Dylan Stewart and Ben Weinstein - University of Florida.
-
- This benchmark dataset contains a consistent annotation approach across a variety of ecosystems.
+This benchmark dataset contains a consistent annotation approach across a variety of ecosystems.
 
 * Free software: MIT license
 * Documentation: https://neontreeevaluation-python.readthedocs.io.
+* This package is a port of the R package: https://github.com/weecology/NeonTreeEvaluation_package
 
 # Installation
 
 # Download sensor data
 
-To download evaluation data from the Zenodo archive (1GB), use the download() function to place the data in the correct package location. Download the much larger training data, set training=TRUE.
-```{r, eval=FALSE}
+To download evaluation data from the Zenodo archive (1GB), use the download() function to place the data in the correct package location.
+
+```
 from neontreeevaluation import download
 download()
 ```
@@ -36,7 +37,7 @@ The plot column should be named the same as the files in the dataset without ext
 
 The main data source are image-annotated crowns, in which a single observer annotated visible trees in 200 40m x 40m images from across the United States. This submission has bounding boxes in image coordinates. To get the benchmark score image-annotated ground truth data.
 
-```{r}
+```
 #Get a three sample plots to run quickly, ignore to run the entire dataset
 df<-submission %>% filter(plot_name %in% c("SJER_052","TEAK_061","TEAK_057"))
 
@@ -55,7 +56,7 @@ results = evaluate_field_stems(submission = df,project = F, show=T, summarize = 
 results
 ```
 
-## Scores for an field-collected crowns
+## Scores for an field-annotated crowns
 
 The second data source is a small number of field-deliniated crowns from three geographic sites. These crowns were drawn on a tablet while physically standing in the field, thereby reducing the uncertainty in crown segmentation.
 
