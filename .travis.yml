@@ -9,7 +9,7 @@ python:
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install: pip install requirements_dev.txt
 script:
-- pytest .
+- pytest --ignore test_download.py
 
 # Assuming you have installed the travis-ci CLI tool, after you
 # create the Github repo and add it to Travis, run the
