@@ -35,6 +35,6 @@ def move(datadir):
     annotation_dir = "{}/annotations".format(path)
     shutil.move(evaluation_dir,evaluation_dest)
     shutil.move(annotation_dir,evaluation_dest)
-    os.remove(path)
+    os.rmdir(path)
     
     
