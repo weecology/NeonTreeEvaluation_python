@@ -18,9 +18,11 @@ This benchmark dataset contains a consistent annotation approach across a variet
 To download evaluation data from the Zenodo archive (1GB), use the download() function to place the data in the correct package location.
 
 ```
-from neontreeevaluation import download
+from src import download
 download()
 ```
+
+This will download the image-annotations as well as the remote sensing data to the data/ folder of this repo.
 
 # Submission Format
 
