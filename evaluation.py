@@ -115,5 +115,4 @@ for pl in list_plots:
     foo = np.take_along_axis(iou,mlocs[:,None],axis=1)
     plot_scores = foo
     evaluation_iou = np.append(evaluation_iou, plot_scores)  # pl,plot_scores])
-    print(evaluation_iou)
-# concatenate the three columns and save as a csv file
+    print(evaluation_iou.shape)
