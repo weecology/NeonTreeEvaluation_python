@@ -12,7 +12,8 @@ def download():
     2) evaluation data. Evaluation data is ~ 2GB in size and will be downloaded to package contents.
 """
     basedir = os.path.dirname(os.path.dirname(__file__))
-    datadir = "{}/{}".format(basedir, "data") 
+    print(basedir)
+    datadir = os.path.join(basedir,"data")
     print("Downloading data files to {}".format(datadir))    
     eval_url = zenodo_url(concept_rec_id="3723356", datadir=datadir)
     
