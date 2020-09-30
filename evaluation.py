@@ -98,17 +98,14 @@ for pl in list_plots:
     tmpi = 0
     # get coordinates of groundtruth and predictions
     gdf_limits, gtf_limits, itc_name = get_vertex_per_plot(pl)
-    if gtf_limits.empty or gdf_limits.empty:
-        print("No field crowns from plot"+pl)
-        break
     # initialize IoU maxtrix GT x Detections
-    iou = np.zeros((gtf_limits.shape[0], gdf_limits.shape[0]))
-    for det_itc in range(gtf_limits.shape[0]):
-        for obs_itc in range(gdf_limits.shape[0]):
-            dets = gdf_limits.iloc[obs_itc, :].values
-            trues = gtf_limits.iloc[det_itc, :].values
+    iou = np.zeros((gdf_limits.shape[0], gtf_limits.shape[0]))
+    for det_itc in range(gdf_limits.shape[0]):
+        for tr_itc in range(gtf_limits.shape[0]):
+            dets = gdf_limits.iloc[det_itc, :].values
+            trues = gtf_limits.iloc[tr_itc, :].values
             # calculate the iou
-            iou[det_itc, obs_itc] = bb_intersection_over_union(dets, trues)
+            iou[det_itc, tr_itc] = bb_intersection_over_union(dets, trues)
             tmpi+=1
     # calculate the optimal matching using hungarian algorithm
     mlocs = np.argmin(-iou,axis=1)
