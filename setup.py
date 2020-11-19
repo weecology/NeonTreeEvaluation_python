@@ -4,15 +4,9 @@
 
 from setuptools import setup, find_packages
 
-with open('README.rst') as readme_file:
-    readme = readme_file.read()
+requirements = ["numpy", "shapely", "pandas","geopandas","rasterio","fiona","rtree","matplotlib","descartes"]
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
-
-requirements = [ ]
-
-setup_requirements = ['pytest-runner', ]
+setup_requirements = ['pytest-runner', bump2version ]
 
 test_requirements = ['pytest>=3', ]
 
@@ -39,7 +33,7 @@ setup(
     },
     install_requires=requirements,
     license="MIT license",
-    long_description=readme + '\n\n' + history,
+    long_description="Python package for individual tree crown detection evaluation",
     include_package_data=True,
     keywords='neontreeevaluation_python',
     name='neontreeevaluation_python',

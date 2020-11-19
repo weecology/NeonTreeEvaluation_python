@@ -27,7 +27,6 @@ def zenodo_url(concept_rec_id, datadir):
         raise IOError("Cannot find zip file in {}".format(datadir))
     os.remove(file)
     move(datadir)
-    
 
 def move(datadir):  
     path = glob.glob("{}/*NeonTreeEvaluation*".format(datadir))[0]
