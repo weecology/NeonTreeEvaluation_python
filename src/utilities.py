@@ -1,8 +1,11 @@
 """
 Utilities module
 """
+import geopandas as gpd
 import os
 import rasterio
+import shapely
+from src import get_data
 
 def check_submission(df):
     """
@@ -34,18 +37,34 @@ def check_download():
     else:
         return False
 
-def project_submission(df):
+def project_boxes(df, transform = True):
     """Convert from image coordinates to geopgraphic cooridinates
     Note that this assumes df is just a single plot being passed to this function
+    transform: If true, convert from image to geographic coordinates
     """
-    plot_names = df.plotname.unique()
+    plot_names = df.plot_name.unique()
     if len(plot_names) > 1:
         raise ValueError("This function projects a single plots worth of data. Multiple plot names found {}".format(plot_names))
     else:
         plot_name = plot_names[0]
     
     rgb_path = get_data.find_path(plot_name, "rgb")
-    rgb_src = rasterio.open(rgb_path)
+    with rasterio.open(rgb_path) as dataset:
+        bounds = dataset.bounds
+        pixelSizeX, pixelSizeY  = dataset.res
+        crs = dataset.crs
+            
+    if transform:
+        #subtract origin. Recall that numpy origin is top left! Not bottom left.
+        df["xmin"] = (df["xmin"].astype(float) *pixelSizeX) + bounds.left
+        df["xmax"] = (df["xmax"].astype(float) * pixelSizeX) + bounds.left
+        df["ymin"] = bounds.top - (df["ymin"].astype(float) * pixelSizeY) 
+        df["ymax"] = bounds.top - (df["ymax"].astype(float) * pixelSizeY)
     
-    #TO DO project
+    # combine column to a shapely Box() object, save shapefile
+    df['geometry'] = df.apply(lambda x: shapely.geometry.box(x.xmin,x.ymin,x.xmax,x.ymax), axis=1)
+    df = gpd.GeoDataFrame(df, geometry='geometry')
     
+    df.crs = crs
+    
+    return df

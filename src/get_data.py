@@ -33,7 +33,7 @@ def xml_parse(path):
     """Parse a xml annotation and return a pandas df"""
     
     plot_name = os.path.basename(path)
-    plot_name = plot_name.split("_")[0]
+    plot_name = plot_name.split(".")[0]
     
     df = pdx.read_xml(path, ["annotation","object"])
     xmin = df.bndbox.apply(lambda x: x["xmin"])

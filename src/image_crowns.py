@@ -1,7 +1,7 @@
 """
 Evaluation module
 """
-from src.utilities import project_submission
+from src.utilities import project_boxes
 from src import get_data
 from src import IoU
 from matplotlib import pyplot
@@ -22,8 +22,7 @@ def image_crowns(df, project, show):
     ground_truth = get_data.load_ground_truth(plot_name)
     rgb_image = get_data.load_rgb_image(plot_name)
     
-    if project:
-        df = utilities.project_boxes(df)
+    df = project_boxes(df, transform = project)
     
     #match  
     result = IoU.compute_precision_recall(ground_truth, df)

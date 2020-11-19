@@ -42,7 +42,7 @@ def compute_precision_recall(ground_truth, submission, iou_threshold=0.5):
     rtree_index = create_rtree_from_poly(ground_truth.geometry)
     
     #Create IoU dataframe
-    iou_df = submission.geometry.apply(lambda: _iou_(x, ground_truth, rtree_index))
+    iou_df = submission.geometry.apply(lambda x : _iou_(x, ground_truth, rtree_index))
     
     return iou_df
 

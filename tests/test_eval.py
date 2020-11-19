@@ -16,7 +16,7 @@ def submission():
     return submission
 
 def test_evaluate_image_crowns(submission):
-    recall, precision = eval.evaluate_image_crowns(df = submission)
+    recall, precision = eval.evaluate_image_crowns(df = submission, project=True)
     
     assert (recall > 0 & recall < 1)
     assert (precision > 0 & precision < 1)

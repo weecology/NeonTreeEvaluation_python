@@ -27,7 +27,12 @@ def evaluate_image_crowns(path=None, df = None, shp=None, project=False, show=Tr
     check_submission(df)
     
     #Run evaluation on all plots
-    results = df.groupby("plot_name").apply(lambda x: image_crowns(df =x, project=project, show=show))
+    results = [ ]
+    for name, group in df.groupby("plot_name"):
+        result = image_crowns(df=group, project=project, show=show)
+        results.append(result)
+
+    result = pd.concat(results)
     
     results["match"] = results.IoU > iou_threshold
     true_positive = sum(results["match"] == True)
