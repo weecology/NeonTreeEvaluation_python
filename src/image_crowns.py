@@ -23,7 +23,7 @@ def image_crowns(df, project, show):
     rgb_image = get_data.load_rgb_image(plot_name)
     
     if project:
-        df = utilities.project_submission(df)
+        df = utilities.project_boxes(df)
     
     #match  
     result = IoU.compute_precision_recall(ground_truth, df)

@@ -34,9 +34,6 @@ def check_download():
     else:
         return False
 
-def xml_parse(xml):
-    pass
-
 def project_submission(df):
     """Convert from image coordinates to geopgraphic cooridinates
     Note that this assumes df is just a single plot being passed to this function

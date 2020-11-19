@@ -11,7 +11,7 @@ def submission():
     """Sample data submission"""
     submission = pd.read_csv("data/submission.csv")
     #Just take a small chunk for testing
-    submission = submission.head(10)
+    submission = submission[submission.plot_name=="SJER_052"]
     
     return submission
 

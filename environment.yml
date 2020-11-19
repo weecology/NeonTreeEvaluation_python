@@ -1,0 +1,16 @@
+name: NeonTreeEvaluation
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - geopandas
+  - descartes
+  - rtree
+  - pandas
+  - pandas_read_xml
+  - pytest
+  - numpy
+  - matplotlib
+  - rasterio
+  - shapely
+  - pip
