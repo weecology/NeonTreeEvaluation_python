@@ -39,10 +39,10 @@ This will download the image-annotations as well as the remote sensing data to t
 
 # Submission Format
 
-The format of the submission is as follows
+The format of the submission a
 
 * A csv file
-* 5 columns: plot_name, xmin, ymin, xmax, ymax
+* 5 required columns: plot_name, xmin, ymin, xmax, ymax
 
 Each row contains information for one predicted bounding box.
 
@@ -70,7 +70,6 @@ results
 The second data source is a small number of field-deliniated crowns from three geographic sites. These crowns were drawn on a tablet while physically standing in the field, thereby reducing the uncertainty in crown segmentation.
 
 ```
-#Get a three sample plots to run quickly, ignore to run the entire dataset
 import pandas as pd
 from src.eval import evaluate_field_crowns
 
@@ -79,9 +78,10 @@ df = submission[submission.plot_name.isin(["OSBS_095_competition"])]
 
 #Compute total recall and precision for the overlap data
 results = evaluate_field_crowns(df = df,project = True, show=False)
+
 results
 ```
 
 ## Scores for an field-collected stems [not yet implemented]
 
-The third data source is the NEON Woody Vegetation Structure Dataset. Each tree stem is represented by a single point. This data has been filtered to represent overstory trees visible in the remote sensing imagery. This evaluation metric is evaluable in the R package (), but has not yet been ported to the python package.
+The third data source is the NEON Woody Vegetation Structure Dataset. Each tree stem is represented by a single point. This data has been filtered to represent overstory trees visible in the remote sensing imagery. This evaluation metric is evaluable in the R package (see above), but has not yet been ported to the python package.
