@@ -55,6 +55,13 @@ def load_ground_truth(plot_name):
     
     return geo_ground_truth
 
+def load_field_crown(plot_name):
+    """Load annotation and return projected data"""
+    field_data = gpd.read_file("data/field_crowns.shp")
+    plot_name = plot_name.replace("_competition","")
+    plot_data = field_data[field_data.plotID == plot_name]
+    return plot_data
+
 def load_rgb_image(plot_name):
     path = find_path(plot_name,data_type="rgb")
     src = rasterio.open(path)

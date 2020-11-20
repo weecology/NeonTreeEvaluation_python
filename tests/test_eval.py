@@ -18,6 +18,13 @@ def submission():
 def test_evaluate_image_crowns(submission):
     recall, precision = eval.evaluate_image_crowns(df = submission, project=True)
     
-    assert (recall > 0.0) & (recall < 1.0)
-    assert (precision > 0.0) & (precision < 1.0)
+    assert recall == 7/9
+    assert precision == 7/7
+
+def test_evaluate_field_crowns(submission):
+    submission = pd.read_csv("data/submission.csv")
+    submission = submission[submission.plot_name == "OSBS_95_competition"]
     
+    recall, precision = eval.evaluate_field_crowns(df = submission, project=True, show=True)
+    
+    assert recall == 1.0

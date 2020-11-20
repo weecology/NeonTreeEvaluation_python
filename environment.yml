@@ -7,7 +7,6 @@ dependencies:
   - descartes
   - rtree
   - pandas
-  - pandas_read_xml
   - pytest
   - numpy
   - matplotlib
@@ -15,3 +14,5 @@ dependencies:
   - shapely
   - scipy
   - pip
+  - pip:
+    - pandas_read_xml
