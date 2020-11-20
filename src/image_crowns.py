@@ -1,10 +1,13 @@
 """
 Evaluation module
 """
+import numpy as np
+from matplotlib import pyplot
+import rasterio.plot
+
 from src.utilities import project_boxes
 from src import get_data
 from src import IoU
-from matplotlib import pyplot
 
 def image_crowns(df, project, show):
     """
@@ -19,17 +22,18 @@ def image_crowns(df, project, show):
     else:
         plot_name = plot_names[0]
     
-    ground_truth = get_data.load_ground_truth(plot_name)
-    rgb_image = get_data.load_rgb_image(plot_name)
-    
+    ground_truth = get_data.load_ground_truth(plot_name)    
     df = project_boxes(df, transform = project)
     
-    #match  
-    result = IoU.compute_precision_recall(ground_truth, df)
-    
     if show:
-        ax = pyplot.imshow(rgb_image)
-        ground_truth.plot(ax=ax, color="red",fill=None)
-        df.plot(ax=ax,color="blue",fill=None)
+        rgb_path = get_data.find_path(plot_name, data_type="rgb")
+        rgb_src = rasterio.open(rgb_path)        
+        fig, ax = pyplot.subplots(figsize=(6, 6))
+        rasterio.plot.show(rgb_src, ax = ax)
+        ground_truth.geometry.boundary.plot(color="red", ax = ax)
+        df.geometry.boundary.plot(ax=ax,color="blue")
+        
+    #match  
+    result = IoU.compute_IoU(ground_truth, df)
     
     return result

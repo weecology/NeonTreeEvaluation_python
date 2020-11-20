@@ -18,6 +18,6 @@ def submission():
 def test_evaluate_image_crowns(submission):
     recall, precision = eval.evaluate_image_crowns(df = submission, project=True)
     
-    assert (recall > 0 & recall < 1)
-    assert (precision > 0 & precision < 1)
+    assert (recall > 0.0) & (recall < 1.0)
+    assert (precision > 0.0) & (precision < 1.0)
     

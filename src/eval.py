@@ -5,7 +5,7 @@ import pandas as pd
 from src.utilities import check_submission, check_download
 from src.image_crowns import image_crowns
 
-def evaluate_image_crowns(path=None, df = None, shp=None, project=False, show=True):
+def evaluate_image_crowns(path=None, df = None, shp=None, project=False, show=True, iou_threshold=0.5):
     """Image annotated crown evaluation routine
     submission can be submitted as a .shp, existing pandas dataframe or .csv path
     path: path to .csv on disk
@@ -32,12 +32,12 @@ def evaluate_image_crowns(path=None, df = None, shp=None, project=False, show=Tr
         result = image_crowns(df=group, project=project, show=show)
         results.append(result)
 
-    result = pd.concat(results)
+    results = pd.concat(results)
     
-    results["match"] = results.IoU > iou_threshold
+    results["match"] = results.score > iou_threshold
     true_positive = sum(results["match"] == True)
-    recall = true_positive / ground_truth.shape[0]
-    precision = true_positive / submission.shape[0]
+    recall = true_positive / results.shape[0]
+    precision = true_positive / df.shape[0]
     
     return recall, precision
 
