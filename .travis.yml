@@ -15,7 +15,7 @@ before_install:
 install:
 - conda env create --file=environment.yml
 - source activate NeonTreeEvaluation
-- python setup.py
+- pip install .
 env: TRAVIS=true
 script:
 - pytest 

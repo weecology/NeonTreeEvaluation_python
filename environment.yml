@@ -16,3 +16,4 @@ dependencies:
   - pip
   - pip:
     - pandas_read_xml
+    - bump2version

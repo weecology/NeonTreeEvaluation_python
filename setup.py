@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 requirements = ["numpy", "shapely", "pandas","geopandas","rasterio","fiona","rtree","matplotlib","descartes"]
 
-setup_requirements = ['pytest-runner', bump2version ]
+setup_requirements = ['pytest-runner', 'bump2version' ]
 
 test_requirements = ['pytest>=3', ]
 
