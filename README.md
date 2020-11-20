@@ -41,37 +41,36 @@ The main data source are image-annotated crowns, in which a single observer anno
 
 ```
 #Get a three sample plots to run quickly, ignore to run the entire dataset
-df<-submission %>% filter(plot_name %in% c("SJER_052","TEAK_061","TEAK_057"))
+import pandas as pd
+from src.eval import evaluate_image_crowns
+
+submission = pd.read_csv("data/submission.csv")
+df = submission[submission.plot_name.isin(["SJER_052","TEAK_061","TEAK_057"])]
 
 #Compute total recall and precision for the overlap data
-results<-evaluate_image_crowns(submission = df,project = T, show=F, summarize = T)
+results = evaluate_image_crowns(df = df,project = True, show=False)
 results
-```
+``
 
 For a list of NEON site abbreviations: https://www.neonscience.org/field-sites/field-sites-map
 
-## Scores for an field-collected stems
-The third data source is the NEON Woody Vegetation Structure Dataset. Each tree stem is represented by a single point. This data has been filtered to represent overstory trees visible in the remote sensing imagery.
-
-```
-results = evaluate_field_stems(submission = df,project = F, show=T, summarize = T)
-results
-```
 
 ## Scores for an field-annotated crowns
 
 The second data source is a small number of field-deliniated crowns from three geographic sites. These crowns were drawn on a tablet while physically standing in the field, thereby reducing the uncertainty in crown segmentation.
 
 ```
-df <- submission %>% filter(plot_name=="OSBS_95_competition")
-results<-evaluate_field_crowns(submission = df,project = T)
+#Get a three sample plots to run quickly, ignore to run the entire dataset
+import pandas as pd
+from src.eval import evaluate_field_crowns
+
+submission = pd.read_csv("data/submission.csv")
+df = submission[submission.plot_name.isin(["OSBS_095_competition"])]
+
+#Compute total recall and precision for the overlap data
+results = evaluate_field_crowns(df = df,project = True, show=False)
 results
-```
+``
 
-Credits
--------
-
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
-
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+## Scores for an field-collected stems [not yet implemented]
+The third data source is the NEON Woody Vegetation Structure Dataset. Each tree stem is represented by a single point. This data has been filtered to represent overstory trees visible in the remote sensing imagery. This evaluation metric is evaluable in the R package (), but has not yet been ported to the python package.
