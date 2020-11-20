@@ -1,5 +1,6 @@
 #test_download
 import os
+import pytest
 from src import download
 
 is_travis = 'TRAVIS' in os.environ
