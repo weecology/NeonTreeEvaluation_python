@@ -3,9 +3,6 @@ import os
 import pytest
 import pandas as pd
 
-#Set testing env
-os.environ["NEONTREEEVALUATION_DIR"] = "{}/data/".format(os.path.dirname(__file__))
-
 @pytest.fixture()
 def submission():
     """Sample data submission"""
@@ -15,13 +12,15 @@ def submission():
     
     return submission
 
-def test_evaluate_image_crowns(submission):
+def test_evaluate_image_crowns(submission, monkeypatch):
+    monkeypatch.setenv("NEONTREEEVALUATION_DIR", "{}/data/".format(os.path.dirname(__file__)))
     recall, precision = eval.evaluate_image_crowns(df = submission, project=True)
     
     assert recall == 7/9
     assert precision == 7/7
 
-def test_evaluate_field_crowns(submission):
+def test_evaluate_field_crowns(submission, monkeypatch):
+    monkeypatch.setenv("NEONTREEEVALUATION_DIR", "{}/data/".format(os.path.dirname(__file__)))    
     submission = pd.read_csv("data/submission.csv")
     submission = submission[submission.plot_name == "OSBS_95_competition"]
     
