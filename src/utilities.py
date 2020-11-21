@@ -29,9 +29,11 @@ def check_download():
     #To allow testing, looking for an env var
     if "NEONTREEEVALUATION_DIR" in os.environ:
         data_dir = os.environ["NEONTREEEVALUATION_DIR"]
+        print("Overriding default data location and setting to {}".format(data_dir))        
     else:
         data_dir = "data/NeonTreeEvaluation"
     
+    print("data_directory: {}".format(data_dir))
     if os.path.exists(data_dir):
         return True
     else:

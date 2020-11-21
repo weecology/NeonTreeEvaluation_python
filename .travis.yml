@@ -18,7 +18,7 @@ install:
 env: 
 - TRAVIS=true
 script:
-- pytest 
+- pytest -s
 
 # Assuming you have installed the travis-ci CLI tool, after you
 # create the Github repo and add it to Travis, run the

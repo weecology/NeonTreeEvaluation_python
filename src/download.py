@@ -19,7 +19,7 @@ def download():
     
 def zenodo_url(concept_rec_id, datadir):
     subprocess.call(["zenodo_get", concept_rec_id, "-e","-o", datadir])
-    file = glob.glob("{}/NeonTreeEvaluation*".format(datadir))[0]
+    file = glob.glob("{}/NeonTreeEvaluation*.zip".format(datadir))[0]
     if os.path.exists(file):
         with zipfile.ZipFile(file, 'r') as zip_ref:
             zip_ref.extractall(datadir)
