@@ -1,3 +1,7 @@
+# Deprecation Notice.
+
+This project is not mantained. For scores against the NeonTreeEvaluation benchmark use the R package: https://github.com/weecology/NeonTreeEvaluation_package. For python users looking to evaluate against the DeepForest model, use the DeepForest python package: https://deepforest.readthedocs.io/en/latest/
+
 # A multi-sensor benchmark dataset for detecting individual trees in airborne RGB, Hyperspectral and LiDAR point clouds
 
 [![Travis-CI Build
